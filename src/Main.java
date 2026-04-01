@@ -14,9 +14,9 @@ public class Main {
 
         while (!salir) {
 
-            mostrarOpciones();
             int opcion = leerOpcion(sc);
             salir = procesarOpcion(opcion, gestor, sc);
+            mostrarOpciones();
 
         }
 
@@ -28,7 +28,6 @@ public class Main {
 
         System.out.println("""
                 --- GESTOR DE CALIFICACIONES ---
-                Pulse una tecla según la opción que quiera realizar
                 1. Añadir calificación
                 2. Ver calificaciones
                 3. Calcular la media
@@ -52,7 +51,17 @@ public class Main {
 
     public static int leerOpcion(Scanner sc) {
 
-        return sc.nextInt();
+        System.out.println("Seleccione una opción");
+
+        while (!sc.hasNextInt()) {
+            System.out.println("Error: introduce un número válido");
+            sc.next();
+        }
+
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        return opcion;
 
     }
 
@@ -61,12 +70,14 @@ public class Main {
         switch (opcion) {
 
             case 1:
-                System.out.println("Introduzca el nombre de la asignatura y la nota obtenida");
-                sc.nextLine();
+                System.out.println("Nombre de la asignatura:");
                 String asignatura = sc.nextLine();
-                double calificacion = sc.nextDouble();
+
+                System.out.println("Nota:");
+                double calificacion = Double.parseDouble(sc.nextLine());
+
                 gestor.agregarNota(asignatura, calificacion);
-                System.out.println("La calificación se añadió correctamente");
+                System.out.println("La calificación añadida correctamente");
                 break;
 
             case 2:
@@ -74,8 +85,8 @@ public class Main {
                 break;
 
             case 3:
-                System.out.println("La media de las asignaturas es la siguiente: ");
-                gestor.calcularMedia();
+                double media = gestor.calcularMedia();
+                System.out.println("La media es: " + media);
                 break;
 
             case 4:
@@ -91,12 +102,15 @@ public class Main {
             case 6:
                 gestor.listarNotas();
                 System.out.println("Introduzca el número de la nota que quiera eliminar");
-                int indice = sc.nextInt();
+
+                int indice = leerOpcion(sc);
                 gestor.eliminarNota(indice);
+
                 System.out.println("Calificación eliminada correctamente");
                 break;
 
             case 7:
+                System.out.println("Saliendo del programa...");
                 return true;
 
             default:
