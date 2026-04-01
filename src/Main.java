@@ -8,6 +8,19 @@ public class Main {
 
         GestorNotas gestor = new GestorNotas();
 
+        boolean salir = false;
+
+        mostrarMenuIntro();
+
+        while (!salir) {
+
+            mostrarOpciones();
+            int opcion = leerOpcion(sc);
+            salir = procesarOpcion(opcion, gestor, sc);
+
+        }
+
+        sc.close();
 
     }
 
