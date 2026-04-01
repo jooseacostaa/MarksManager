@@ -40,13 +40,13 @@ public class Main {
     }
 
     public static void mostrarOpciones() {
-        System.out.println("1.Añadir nota - " +
-                "2.Ver notas - " +
-                "3.Calcular media - " +
-                "4.Mostrar aprobadas - " +
-                "5.Mostrar suspendidas - " +
-                "6.Eliminar nota - " +
-                "7.Salir");
+        System.out.println("1. Añadir nota - " +
+                "2. Ver notas - " +
+                "3. Calcular media - " +
+                "4. Mostrar aprobadas - " +
+                "5. Mostrar suspendidas - " +
+                "6. Eliminar nota - " +
+                "7. Salir");
     }
 
     public static int leerOpcion(Scanner sc) {
@@ -86,7 +86,7 @@ public class Main {
 
             case 3:
                 double media = gestor.calcularMedia();
-                System.out.println("La media es: " + media);
+                System.out.println("La media es: " + String.format("%.2f", media));
                 break;
 
             case 4:
@@ -104,9 +104,13 @@ public class Main {
                 System.out.println("Introduzca el número de la nota que quiera eliminar");
 
                 int indice = leerOpcion(sc);
-                gestor.eliminarNota(indice);
 
-                System.out.println("Calificación eliminada correctamente");
+                if (gestor.eliminarNota(indice)) {
+                    System.out.println("Calificación eliminada correctamente");
+                } else {
+                    System.out.println("Error al eliminar la calificación");
+                }
+
                 break;
 
             case 7:
