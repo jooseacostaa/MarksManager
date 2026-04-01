@@ -6,6 +6,9 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
+        GestorNotas gestor = new GestorNotas();
+
+
     }
 
     public static void mostrarMenuIntro() {
@@ -37,6 +40,57 @@ public class Main {
     public static int leerOpcion(Scanner sc) {
 
         return sc.nextInt();
+
+    }
+
+    public static boolean procesarOpcion(int opcion, GestorNotas gestor, Scanner sc) {
+
+        switch (opcion) {
+
+            case 1:
+                System.out.println("Introduzca el nombre de la asignatura y la nota obtenida");
+                sc.nextLine();
+                String asignatura = sc.nextLine();
+                double calificacion = sc.nextDouble();
+                gestor.agregarNota(asignatura, calificacion);
+                System.out.println("La calificación se añadió correctamente");
+                break;
+
+            case 2:
+                gestor.listarNotas();
+                break;
+
+            case 3:
+                System.out.println("La media de las asignaturas es la siguiente: ");
+                gestor.calcularMedia();
+                break;
+
+            case 4:
+                System.out.println("Las asignaturas aprobadas son las siguientes: ");
+                gestor.listarAprobadas();
+                break;
+
+            case 5:
+                System.out.println("Las asignaturas suspendidas son las siguientes: ");
+                gestor.listarSuspendidas();
+                break;
+
+            case 6:
+                gestor.listarNotas();
+                System.out.println("Introduzca el número de la nota que quiera eliminar");
+                int indice = sc.nextInt();
+                gestor.eliminarNota(indice);
+                System.out.println("Calificación eliminada correctamente");
+                break;
+
+            case 7:
+                return true;
+
+            default:
+                System.out.println("Opción no válida");
+        }
+
+        return false;
 
     }
 
